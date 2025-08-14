@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candy Crush Hacker</title>
+     <link rel="icon" type="image/x-icon" href="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678132-gift-256.png">
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif;
+            background-image: url("https://wallpapercave.com/wp/wp2347607.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            color: #f0f8ff; /* Light azure for better readability */
+            text-align: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #FF4081;
+            font-weight: 700;
+            background-image: url("https://wallpapercave.com/uwp/uwp4834170.jpeg");
+            background-size: cover;
+            background-repeat: repeat;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3); /* Blue shadow */
+            backdrop-filter: blur(5px);
+            border: 5px solid #f8aa02; /* Green border */
+        }
+            
+        
+        
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-image: url("https://wallpapercave.com/uwp/uwp4834170.jpeg");
+            background-size: cover;
+            background-repeat: repeat;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.3); /* Blue shadow */
+            backdrop-filter: blur(5px);
+            border: 5px solid #f8aa02; /* Green border */
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .option-btn {
+            background: linear-gradient(45deg, #FF4081, #2196F3); /* Pink to blue gradient */
+            color: white;
+            border: none;
+            padding: 20px;
+            font-size: 1.5em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4); /* Blue shadow */
+            font-weight: bold;
+            text-shadow: 1px 1px 0 #4CAF50; /* Green text shadow */
+            position: relative;
+            overflow: hidden;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .option-btn:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.5); /* Pink shadow */
+            background: linear-gradient(45deg, #E91E63, #1976D2); /* Darker pink to blue */
+        }
+        
+        .option-btn:active {
+            transform: scale(0.98) rotate(-1deg);
+        }
+        
+        .option-btn::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, #FF4081, #4CAF50, #2196F3); /* Pink, green, blue */
+            z-index: -1;
+            border-radius: 50px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .option-btn:hover::before {
+            opacity: 0.3;
+            animation: shine 1.5s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(0deg); }
+            100% { transform: translateX(100%) rotate(360deg); }
+        }
+        
+        .user-id-form {
+            display: none;
+            margin-top: 20px;
+            padding: 25px;
+            background-color: rgb(123, 4, 235);
+            background-size: cover;
+            border-radius: 20px;
+            box-shadow: inset 0 0 15px rgba(33, 150, 243, 0.3); /* Blue shadow */
+            border: 3px  #4CAF50; /* Green border */
+        }
+        
+        .user-id-form p {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: #4ffa00; /* Pink */
+            font-weight: bold;
+            text-shadow: 1px 1px 0 rgba(3, 75, 231, 0.7);
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .user-id-form input {
+            padding: 15px;
+            width: 70%;
+            border: none;
+            border-radius: 50px;
+            margin-right: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(33, 150, 243, 0.3); /* Blue shadow */
+            border: 2px solid #FF4081; /* Pink border */
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .user-id-form button {
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #FF4081, #4CAF50); /* Pink to green */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4); /* Green shadow */
+            transition: all 0.3s;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .user-id-form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 15px rgba(255, 64, 129, 0.5); /* Pink shadow */
+        }
+        
+        .candy {
+            font-size: 2em;
+            margin: 0 5px;
+            animation: bounce 0.5s infinite alternate;
+            color: #FF4081; /* Pink */
+        }
+        
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+        
+        .progress-container {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid #2196F3; /* Blue border */
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #FF4081, #4CAF50, #2196F3); /* Pink, green, blue */
+            width: 0%;
+            transition: width 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                          transparent, 
+                          rgba(255, 255, 255, 0.5), 
+                          transparent);
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .status-message {
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #2196F3; /* Blue */
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .verify-btn {
+            display: none;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #4CAF50, #2196F3); /* Green to blue */
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px auto;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4); /* Blue shadow */
+            transition: all 0.3s;
+            text-shadow: 1px 1px 0 #388E3C; /* Darker green */
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        .verify-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5); /* Green shadow */
+            background: linear-gradient(45deg, #388E3C, #1976D2); /* Darker green to blue */
+        }
+        
+        .verify-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .floating-candies {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .candy-icon {
+            position: absolute;
+            font-size: 2em;
+            animation: float 10s infinite linear;
+            opacity: 0.7;
+            color: #FF4081; /* Pink */
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .footer {
+            margin-top: 40px;
+            padding: 15px;
+            font-size: 0.9em;
+            color: white;
+            text-shadow: 1px 1px 0 #2196F3; /* Blue shadow */
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Rest of your HTML remains exactly the same -->
+    <div class="floating-candies">
+        <!-- Floating candy icons -->
+        <div class="candy-icon" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="candy-icon" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="candy-icon" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="candy-icon" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="candy-icon" style="left: 50%; animation-delay: 3s;"></div>
+        <div class="candy-icon" style="left: 60%; animation-delay: 5s;"></div>
+        <div class="candy-icon" style="left: 70%; animation-delay: 2.5s;"></div>
+        <div class="candy-icon" style="left: 80%; animation-delay: 1.5s;"></div>
+        <div class="candy-icon" style="left: 90%; animation-delay: 3.5s;"></div>
+    </div>
+    
+    <div class="header">
+        <h1>Candy Crush Hacker Deluxe <span class="candy"></span></h1>
+    </div>
+    
+    <div class="container">
+        <p style="font-size: 1.5em; text-shadow: 1px 1px 0 #4CAF50; color: #FF4081; font-family: 'Comic Sans MS', cursive;">Get <strong>UNLIMITED</strong> goodies in Candy Crush Saga! 🎉</p>
+
+        <div class="options">
+            <button class="option-btn" data-option="hearts">
+                Get UNLIMITED Hearts 💖💖💖
+                <div style="font-size: 0.7em;">(Never wait again!)</div>
+            </button>
+            <div id="hearts-form" class="user-id-form">
+                <p>Enter your Candy Crush ID to get INFINITE hearts!</p>
+                <input type="text" placeholder="Your Sweet User ID" id="hearts-id">
+                <button onclick="checkUserId('hearts')">SUGAR POWER! 🍭</button>
+                
+                <div id="hearts-progress" class="progress-container">
+                    <div class="status-message">Checking your ID... 🕵️‍♀️</div>
+                    <div class="progress-bar">
+                        <div id="hearts-progress-bar" class="progress"></div>
+                    </div>
+                </div>
+                
+                <button id="hearts-verify" class="verify-btn" onclick="verifyUser('hearts')">
+                    VERIFY & GET HEARTS! 💖💖💖
+                </button>
+            </div>
+            
+            <button class="option-btn" data-option="gold">
+                Unlimited GOLD BARS 💰💰💰
+                <div style="font-size: 0.7em;">(Become a Candy Millionaire!)</div>
+            </button>
+            <div id="gold-form" class="user-id-form">
+                <p>Enter your Candy Crush ID to get RICH!</p>
+                <input type="text" placeholder="Your Golden ID" id="gold-id">
+                <button onclick="checkUserId('gold')">MAKE IT RAIN! 💸</button>
+                
+                <div id="gold-progress" class="progress-container">
+                    <div class="status-message">Counting your gold... 💰</div>
+                    <div class="progress-bar">
+                        <div id="gold-progress-bar" class="progress"></div>
+                    </div>
+                </div>
+                
+                <button id="gold-verify" class="verify-btn" onclick="verifyUser('gold')">
+                    CLAIM YOUR GOLD! 🏆🏆🏆
+                </button>
+            </div>
+            
+            <button class="option-btn" data-option="level">
+                INSTANT LEVEL UP! 🚀🚀🚀
+                <div style="font-size: 0.7em;">(Skip the hard parts!)</div>
+            </button>
+            <div id="level-form" class="user-id-form">
+                <p>Enter your Candy Crush ID to ZOOM through levels!</p>
+                <input type="text" placeholder="Your Rocket ID" id="level-id">
+                <button onclick="checkUserId('level')">BLAST OFF! 🚀</button>
+                
+                <div id="level-progress" class="progress-container">
+                    <div class="status-message">Preparing your rocket fuel... ⛽</div>
+                    <div class="progress-bar">
+                        <div id="level-progress-bar" class="progress"></div>
+                    </div>
+                </div>
+                
+                <button id="level-verify" class="verify-btn" onclick="verifyUser('level')">
+                    ACTIVATE LEVEL HACK! 📈📈📈
+                </button>
+            </div>
+        </div>
+        
+    </div>
+    
+    <script>
+        // Create more floating candies dynamically
+        function createFloatingCandies() {
+            const container = document.querySelector('.floating-candies');
+            const candies = [];
+            
+            for (let i = 0; i < 15; i++) {
+                const candy = document.createElement('div');
+                candy.className = 'candy-icon';
+                candy.textContent = candies[Math.floor(Math.random() * candies.length)];
+                candy.style.left = Math.random() * 100 + '%';
+                candy.style.animationDelay = Math.random() * 5 + 's';
+                candy.style.animationDuration = 5 + Math.random() * 10 + 's';
+                candy.style.fontSize = (1 + Math.random() * 2) + 'em';
+                container.appendChild(candy);
+            }
+        }
+        
+        createFloatingCandies();
+        
+        // Show the appropriate form when a button is clicked
+        document.querySelectorAll('.option-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Hide all forms first
+                document.querySelectorAll('.user-id-form').forEach(form => {
+                    form.style.display = 'none';
+                });
+                
+                // Show the corresponding form
+                const option = this.getAttribute('data-option');
+                document.getElementById(option + '-form').style.display = 'block';
+                
+                // Play a fun sound (in a real site)
+                console.log("🎵 Imagine fun candy sounds here! 🎵");
+            });
+        });
+        
+        // Function to check user ID with progress bar
+        function checkUserId(option) {
+            const userId = document.getElementById(option + '-id').value;
+            if (userId.trim() === '') {
+                alert('Oops! You forgot to enter your ID! 🍬');
+                return;
+            }
+            
+            // Show progress container
+            const progressContainer = document.getElementById(option + '-progress');
+            const progressBar = document.getElementById(option + '-progress-bar');
+            progressContainer.style.display = 'block';
+            
+            // Hide verify button if it was shown
+            document.getElementById(option + '-verify').style.display = 'none';
+            
+            // Fun messages for each option
+            const messages = {
+                hearts: ["Checking heart database... 💓", "Finding sweet matches... 🍫", "Preparing love potion... 💘"],
+                gold: ["Scanning vault... 🔐", "Counting gold bars... 💰", "Polishing coins... ✨"],
+                level: ["Analyzing progress... 📊", "Boosting skills... 🏋️", "Preparing rocket... 🚀"]
+            };
+            
+            let messageIndex = 0;
+            
+            // Simulate progress with fun messages
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 2;
+                progressBar.style.width = progress + '%';
+                
+                // Change message every 20% progress
+                if (progress % 20 === 0 && messageIndex < messages[option].length) {
+                    progressContainer.querySelector('.status-message').textContent = messages[option][messageIndex];
+                    messageIndex++;
+                }
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        // Show verify button after progress completes
+                        document.getElementById(option + '-verify').style.display = 'inline-block';
+                        progressContainer.querySelector('.status-message').textContent = 
+                            option === 'hearts' ? "Hearts ready to flow! 💖💖💖" :
+                            option === 'gold' ? "Gold bars secured! 💰💰💰" :
+                            "Level boost charged! 🚀🚀🚀";
+                        
+                        // Confetti effect (visualization)
+                        console.log("🎉 Imagine colorful confetti here! 🎊");
+                    }, 500);
+                }
+            }, 100);
+        }
+        
+        // Function to handle verification
+        function verifyUser(option) {
+            const userId = document.getElementById(option + '-id').value;
+            
+            // Fun success messages
+            const successMessages = {
+                hearts: `Infinite hearts ACTIVATED for ${userId}! 💖\n\nYour heart meter will never run empty again!`,
+                gold: `GOLD RUSH for ${userId}! 💰\n\nYou're now the richest candy crusher in town!`,
+                level: `LEVEL UP SUPERCHARGE for ${userId}! 🚀\n\nGet ready to blast through levels like never before!`
+            };
+            
+            // Create a fun alert
+            const alertMessage = `
+           ghadi n7ot link lighat3tini hna
+        
+            `;
+            
+            alert(alertMessage);
+            
+            // Reset the form
+            document.getElementById(option + '-id').value = '';
+            document.getElementById(option + '-progress').style.display = 'none';
+            document.getElementById(option + '-verify').style.display = 'none';
+            document.getElementById(option + '-form').style.display = 'none';
+            document.getElementById(option + '-progress-bar').style.width = '0%';
+        }
+    </script>
+</body>
+</html>
